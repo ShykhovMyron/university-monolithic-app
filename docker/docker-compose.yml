@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mysql:8.0.23
+    restart: always
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+    ports:
+      - ${DB_PORT_OUT}:${DB_PORT_IN}
+    volumes:
+      - mysql-test:/var/lib/mysql
+
+volumes:
+  mysql-test:
+    driver: local
+
